@@ -7,11 +7,11 @@ contract IdContract is Ownable {
 
     string public id;
 
-    constructor(string _id) public {
-        id = _id;
+    constructor(string _id, address _searchAddress) public {
+        setId(_id, _searchAddress);
     }
 
-    function setId(string _id, address _searchAddress) external onlyOwner {
+    function setId(string _id, address _searchAddress) public onlyOwner {
         SearchContract(_searchAddress).setLink(uint(keccak256(_id)));
         id = _id;
     }
