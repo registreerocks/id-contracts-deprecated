@@ -12,12 +12,12 @@ contract IdContract is Ownable {
     }
 
     function setId(string _id, address _searchAddress) public onlyOwner {
-        SearchContract(_searchAddress).setLink(uint(keccak256(_id)));
+        SearchContract(_searchAddress).setLink(keccak256(abi.encodePacked(_id)));
         id = _id;
     }
 
     function deleteId(address _searchAddress) external onlyOwner {
-        SearchContract(_searchAddress).deleteLink(uint(keccak256(id)));
+        SearchContract(_searchAddress).deleteLink(keccak256(abi.encodePacked(id)));
         id = "";
     }
 } 
