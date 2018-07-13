@@ -1,0 +1,126 @@
+---
+swagger: "2.0"
+info:
+  description: ""
+  version: "0.1.0"
+  title: "Id Contracts API"
+host: "localhost:8080"
+basePath: "/v0.1"
+tags:
+- name: "Id Contracts API"
+  description: ""
+schemes:
+- "https"
+paths:
+  /contract/deploy:
+    post:
+      tags:
+        - "contract"
+      summary: "deploy a new id contract"
+      description: ""
+      operationId: "deploy_id_contract"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Id of entry in identifying DB"
+        required: true
+        schema:
+          $ref: "#/definitions/Id"
+      responses:
+        200:
+          description: OK
+      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+  /contract/update_id:
+    post:
+      tags:
+        - "contract"
+      summary: "set a new id within a contract"
+      description: ""
+      operationId: "set_id"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Current id and new id of entry in indentifying DB"
+        required: true
+        schema:
+          $ref: "#/definitions/Set"
+      responses:
+        200:
+          description: OK
+        400: 
+          description: Invalid input
+      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+  /contract/delete_id:
+    post:
+      tags:
+        - "contract"
+      summary: "delete the id from a contract"
+      description: ""
+      operationId: "delete_id"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Current id of entry in identifying DB"
+        required: true
+        schema:
+          $ref: "#/definitions/Id"
+      responses:
+        200:
+          description: OK
+        400: 
+          description: Invalid input
+      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+  /contract/reset_id:
+    post:
+      tags:
+        - "contract"
+      summary: "reset id once it has been deleted"
+      description: ""
+      operationId: "set_id_after_deletion"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Id contract address and new id"
+        required: true
+        schema:
+          $ref: "#/definitions/Reset"
+      responses:
+        200:
+          description: OK
+        400: 
+          description: Invalid input
+      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+definitions:
+  Id:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+    xml:
+      name: "Id"
+  Set:
+    type: "object"
+    properties:
+      current_id:
+        type: "string"
+      new_id:
+        type: "string"
+    xml:
+      name: "Set"
+  Reset:
+    type: "object"
+    properties:
+      address:
+        type: "string"
+      id:
+        type: "string"
+    xml:
+      name: "Reset"
