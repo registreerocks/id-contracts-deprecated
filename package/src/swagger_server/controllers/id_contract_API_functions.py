@@ -1,4 +1,5 @@
-from .transaction_functions import (_delete_id, _deploy_id_contract, _set_id,
+from .transaction_functions import (_delete_id, _deploy_id_contract,
+                                    _get_id_contract, _set_id,
                                     _set_id_after_deletion)
 
 
@@ -13,3 +14,6 @@ def delete_id(body):
 
 def set_id_after_deletion(body):
     return _set_id_after_deletion(body.get('address'), body.get('id'))
+
+def get_id_contract_address(id):
+    return _get_id_contract(id)

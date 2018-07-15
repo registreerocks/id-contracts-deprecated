@@ -98,6 +98,25 @@ paths:
         400: 
           description: Invalid input
       x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+  /contract/get_address:
+    get:
+      tags:
+        - "contract"
+      summary: "get id contract address"
+      description: ""
+      operationId: "get_id_contract_address"
+      parameters:
+      - in: "query"
+        name: "id"
+        description: "Id of entry in identifying DB"
+        required: true
+        type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: OK
+      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
 definitions:
   Id:
     type: "object"
