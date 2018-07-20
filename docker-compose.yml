@@ -10,5 +10,5 @@ services:
     environment:
       RPC_HOST: 159.65.197.244
       RPC_PORT: 8545
-      SEARCH_CONTRACT: "0xcee9d8c0915054e36d9985549ead45d791bf683c"
+      SEARCH_CONTRACT: "0xeb02de77d020561ef8269bf8dc0c65a11aa13b13"
     
