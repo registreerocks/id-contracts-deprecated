@@ -8,7 +8,7 @@ services:
     ports:
       - "8085:8080"
     environment:
-      RPC_HOST: 206.189.4.230
+      RPC_HOST: 159.65.197.244
       RPC_PORT: 8545
       SEARCH_CONTRACT: "0xcee9d8c0915054e36d9985549ead45d791bf683c"
     
