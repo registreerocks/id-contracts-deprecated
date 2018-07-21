@@ -43,5 +43,5 @@ def _get_id_contract(_id):
     search_contract = W3.eth.contract(address=SEARCH_CONTRACT_ADDRESS, abi=search_contract_interface['abi'])
     keccak_hash = keccak.new(digest_bits=256)
     keccak_hash.update(_id.encode())
-    id_contract_address = search_contract.functions.idcontracts(keccak_hash.hexdigest()).call() # id needs to be transformed
-    return W3.eth.contract(address=id_contract_address, abi=id_contract_interface['abi'])
+    id_contract_address = search_contract.functions.idcontracts(keccak_hash.hexdigest()).call()
+    return id_contract_address
