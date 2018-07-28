@@ -117,6 +117,46 @@ paths:
         200:
           description: OK
       x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+  /contract/get_identifying_id:
+    get:
+      tags:
+        - "contract"
+      summary: "get id stored in id contract"
+      description: ""
+      operationId: "get_identifying_id"
+      parameters:
+      - in: "query"
+        name: "address"
+        description: "id contract address"
+        required: true
+        type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: OK
+      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+  /contract/bulk_get_identifying_id:
+    get:
+      tags:
+        - "contract"
+      summary: "get ids stored in id contracts"
+      description: ""
+      operationId: "get_identifying_ids"
+      parameters:
+      - in: "query"
+        name: "addresses"
+        description: "id contract addresses"
+        type: "array"
+        items: 
+          type: "string"
+        required: true
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: OK
+      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
 definitions:
   Id:
     type: "object"
