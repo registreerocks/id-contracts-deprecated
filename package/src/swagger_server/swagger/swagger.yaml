@@ -137,20 +137,21 @@ paths:
           description: OK
       x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
   /contract/bulk_get_identifying_id:
-    get:
+    post:
       tags:
         - "contract"
       summary: "get ids stored in id contracts"
       description: ""
       operationId: "get_identifying_ids"
+      consumes:
+      - "application/json"
       parameters:
-      - in: "query"
-        name: "addresses"
-        description: "id contract addresses"
-        type: "array"
-        items: 
-          type: "string"
+      - in: "body"
+        name: "body"
+        description: "Array of addresses"
         required: true
+        schema:
+          $ref: "#/definitions/BulkGetIds"
       produces:
       - "application/json"
       responses:
@@ -183,3 +184,12 @@ definitions:
         type: "string"
     xml:
       name: "Reset"
+  BulkGetIds:
+    type: "object"
+    properties:
+      "addresses":
+        type: "array"
+        items: 
+          type: "string"
+    xml:
+      name: "BulkGetIds"
