@@ -22,5 +22,5 @@ def get_id_contract_address(id):
 def get_identifying_id(address):
     return _get_identifying_id(address)
 
-def get_identifying_ids(addresses):
-    return _get_identifying_ids(addresses)
+def get_identifying_ids(body):
+    return _get_identifying_ids(body.get('addresses'))
