@@ -135,6 +135,8 @@ paths:
       responses:
         200:
           description: OK
+        401: 
+          description: Authorization error
       x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
   /contract/bulk_get_identifying_id:
     post:
