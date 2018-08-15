@@ -48,9 +48,12 @@ def _get_id_contract_address(_id):
 
 def _get_identifying_id(address):
     id_contract = W3.eth.contract(address=address, abi=id_contract_interface['abi'])
-    _id = id_contract.functions.id().call()
-    db_url = id_contract.functions.dbUrl().call()
-    return {'id': _id, 'db_url': db_url}
+    try:
+        _id = id_contract.functions.getId().call({'from': W3.eth.accounts[0]})
+        db_url = id_contract.functions.getDbUrl().call({'from': W3.eth.accounts[0]})
+        return {'id': _id, 'db_url': db_url}
+    except:
+        return {'ERROR': 'Sender unauthorized'}, 401
 
 def _get_identifying_ids(addresses):
     _ids = dict()
