@@ -60,3 +60,10 @@ def _get_identifying_ids(addresses):
     for address in addresses:
         _ids[address] = _get_identifying_id(address)
     return _ids
+
+def _claim_ownership(contract_address, new_owner):
+    id_contract = W3.eth.contract(address=contract_address, abi=id_contract_interface['abi'])
+    old_owner = id_contract.functions.owner().call()
+    id_contract.functions.registerAllowedUser(old_owner).transact({'from': W3.eth.accounts[0]})
+    id_contract.functions.transferOwnership(new_owner).transact({'from': W3.eth.accounts[0]})
+    return True

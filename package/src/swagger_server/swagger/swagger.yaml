@@ -160,6 +160,28 @@ paths:
         200:
           description: OK
       x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+  /contract/claim_ownership:
+    post:
+      tags:
+        - "contract"
+      summary: "transfer ownership to new address"
+      description: ""
+      operationId: "claim_ownership"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Contract address and new owner's address"
+        required: true
+        schema:
+          $ref: "#/definitions/ClaimOwnership"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: OK
+      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
 definitions:
   Id:
     type: "object"
@@ -191,9 +213,18 @@ definitions:
   BulkGetIds:
     type: "object"
     properties:
-      "addresses":
+      addresses:
         type: "array"
         items: 
           type: "string"
     xml:
       name: "BulkGetIds"
+  ClaimOwnership:
+    type: "object"
+    properties:
+      contract_address:
+        type: "string"
+      new_owner: 
+        type: "string"
+    xml:
+      name: "ClaimOwnership"
