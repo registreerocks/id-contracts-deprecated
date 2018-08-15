@@ -164,6 +164,8 @@ definitions:
     properties:
       id:
         type: "string"
+      db_url:
+        type: "string"
     xml:
       name: "Id"
   Set:

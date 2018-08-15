@@ -5,7 +5,7 @@ from .transaction_functions import (_delete_id, _deploy_id_contract,
 
 
 def deploy_id_contract(body):
-    return _deploy_id_contract(body.get('id'))
+    return _deploy_id_contract(body.get('id'), body.get('db_url'))
 
 def set_id(body):
     return _set_id(body.get('current_id'), body.get('new_id'))

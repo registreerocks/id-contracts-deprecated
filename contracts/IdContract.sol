@@ -6,9 +6,11 @@ import "./SearchContract.sol";
 contract IdContract is Ownable {
 
     string public id;
+    string public dbUrl;
 
-    constructor(string _id, address _searchAddress) public {
+    constructor(string _id, string _dbUrl, address _searchAddress) public {
         setId(_id, _searchAddress);
+        dbUrl = _dbUrl;
     }
 
     function setId(string _id, address _searchAddress) public onlyOwner {
