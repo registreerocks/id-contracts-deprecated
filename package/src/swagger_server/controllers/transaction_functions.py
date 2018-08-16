@@ -67,3 +67,19 @@ def _claim_ownership(contract_address, new_owner):
     id_contract.functions.registerAllowedUser(old_owner).transact({'from': W3.eth.accounts[0]})
     id_contract.functions.transferOwnership(new_owner).transact({'from': W3.eth.accounts[0]})
     return True
+
+def _register_allowed_user(contract_address, user_address):
+    id_contract = W3.eth.contract(address=contract_address, abi=id_contract_interface['abi'])
+    try: 
+        id_contract.functions.registerAllowedUser(user_address).transact({'from': W3.eth.accounts[0]})
+        return True
+    except:
+        return {'ERROR': 'Sender unauthorized'}, 401
+
+def _deregister_allowed_user(contract_address, user_address):
+    id_contract = W3.eth.contract(address=contract_address, abi=id_contract_interface['abi'])
+    try: 
+        id_contract.functions.deregisterAllowedUser(user_address).transact({'from': W3.eth.accounts[0]})
+        return True
+    except:
+        return {'ERROR': 'Sender unauthorized'}, 401
