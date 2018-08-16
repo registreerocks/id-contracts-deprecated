@@ -182,6 +182,54 @@ paths:
         200:
           description: OK
       x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+  /contract/register_third_party:
+    post:
+      tags:
+        - "contract"
+      summary: "registers a third party within a given smart contract"
+      description: ""
+      operationId: "register_allowed_user"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Contract address and address of party to be registered"
+        required: true
+        schema:
+          $ref: "#/definitions/Register"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: OK
+        401: 
+          description: Authorization error
+      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+  /contract/deregister_third_party:
+    post:
+      tags:
+        - "contract"
+      summary: "deregisters a third party within a given smart contract"
+      description: ""
+      operationId: "deregister_allowed_user"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Contract address and address of party to be deregistered"
+        required: true
+        schema:
+          $ref: "#/definitions/Register"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: OK
+        401: 
+          description: Authorization error
+      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
 definitions:
   Id:
     type: "object"
@@ -228,3 +276,12 @@ definitions:
         type: "string"
     xml:
       name: "ClaimOwnership"
+  Register:
+    type: "object"
+    properties:
+      contract_address:
+        type: "string"
+      user_address: 
+        type: "string"
+    xml:
+      name: "Register"

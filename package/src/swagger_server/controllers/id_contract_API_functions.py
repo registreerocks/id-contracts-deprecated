@@ -1,8 +1,10 @@
 from .transaction_functions import (_claim_ownership, _delete_id,
                                     _deploy_id_contract,
+                                    _deregister_allowed_user,
                                     _get_id_contract_address,
                                     _get_identifying_id, _get_identifying_ids,
-                                    _set_id, _set_id_after_deletion)
+                                    _register_allowed_user, _set_id,
+                                    _set_id_after_deletion)
 
 
 def deploy_id_contract(body):
@@ -28,3 +30,9 @@ def get_identifying_ids(body):
 
 def claim_ownership(body):
     return _claim_ownership(body.get('contract_address'), body.get('new_owner'))
+
+def register_allowed_user(body):
+    return _register_allowed_user(body.get('contract_address'), body.get('user_address'))
+
+def deregister_allowed_user(body):
+    return _deregister_allowed_user(body.get('contract_address'), body.get('user_address'))
