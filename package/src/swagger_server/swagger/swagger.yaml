@@ -1,287 +1,281 @@
----
-swagger: "2.0"
+openapi: 3.0.0
 info:
-  description: ""
-  version: "0.1.0"
-  title: "Id Contracts API"
-host: "localhost:8080"
-basePath: "/v0.1"
+  description: ''
+  version: 0.1.0
+  title: Id Contracts API
 tags:
-- name: "Id Contracts API"
-  description: ""
-schemes:
-- "https"
+  - name: Id Contracts API
+    description: ''
 paths:
   /contract/deploy:
     post:
       tags:
-        - "contract"
-      summary: "deploy a new id contract"
-      description: ""
-      operationId: "deploy_id_contract"
-      consumes:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Id of entry in identifying DB"
-        required: true
-        schema:
-          $ref: "#/definitions/Id"
+        - contract
+      summary: deploy a new id contract
+      description: ''
+      operationId: deploy_id_contract
       responses:
-        200:
+        '200':
           description: OK
-      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.id_contract_API_functions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Id'
+        description: Id of entry in identifying DB
+        required: true
   /contract/update_id:
     post:
       tags:
-        - "contract"
-      summary: "set a new id within a contract"
-      description: ""
-      operationId: "set_id"
-      consumes:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Current id and new id of entry in indentifying DB"
-        required: true
-        schema:
-          $ref: "#/definitions/Set"
+        - contract
+      summary: set a new id within a contract
+      description: ''
+      operationId: set_id
       responses:
-        200:
+        '200':
           description: OK
-        400: 
+        '400':
           description: Invalid input
-      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.id_contract_API_functions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Set'
+        description: Current id and new id of entry in indentifying DB
+        required: true
   /contract/delete_id:
     post:
       tags:
-        - "contract"
-      summary: "delete the id from a contract"
-      description: ""
-      operationId: "delete_id"
-      consumes:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Current id of entry in identifying DB"
-        required: true
-        schema:
-          $ref: "#/definitions/Id"
+        - contract
+      summary: delete the id from a contract
+      description: ''
+      operationId: delete_id
       responses:
-        200:
+        '200':
           description: OK
-        400: 
+        '400':
           description: Invalid input
-      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.id_contract_API_functions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Id'
+        description: Current id of entry in identifying DB
+        required: true
   /contract/reset_id:
     post:
       tags:
-        - "contract"
-      summary: "reset id once it has been deleted"
-      description: ""
-      operationId: "set_id_after_deletion"
-      consumes:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Id contract address and new id"
-        required: true
-        schema:
-          $ref: "#/definitions/Reset"
+        - contract
+      summary: reset id once it has been deleted
+      description: ''
+      operationId: set_id_after_deletion
       responses:
-        200:
+        '200':
           description: OK
-        400: 
+        '400':
           description: Invalid input
-      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.id_contract_API_functions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reset'
+        description: Id contract address and new id
+        required: true
   /contract/get_address:
     get:
       tags:
-        - "contract"
-      summary: "get id contract address"
-      description: ""
-      operationId: "get_id_contract_address"
+        - contract
+      summary: get id contract address
+      description: ''
+      operationId: get_id_contract_address
       parameters:
-      - in: "query"
-        name: "id"
-        description: "Id of entry in identifying DB"
-        required: true
-        type: "string"
-      produces:
-      - "application/json"
+        - in: query
+          name: id
+          description: Id of entry in identifying DB
+          required: true
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: OK
-      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.id_contract_API_functions
   /contract/get_identifying_id:
     get:
       tags:
-        - "contract"
-      summary: "get id stored in id contract"
-      description: ""
-      operationId: "get_identifying_id"
+        - contract
+      summary: get id stored in id contract
+      description: ''
+      operationId: get_identifying_id
       parameters:
-      - in: "query"
-        name: "address"
-        description: "id contract address"
-        required: true
-        type: "string"
-      produces:
-      - "application/json"
+        - in: query
+          name: address
+          description: id contract address
+          required: true
+          schema:
+            type: string
       responses:
-        200:
+        '200':
           description: OK
-        401: 
+        '401':
           description: Authorization error
-      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+      x-swagger-router-controller: swagger_server.controllers.id_contract_API_functions
   /contract/bulk_get_identifying_id:
     post:
       tags:
-        - "contract"
-      summary: "get ids stored in id contracts"
-      description: ""
-      operationId: "get_identifying_ids"
-      consumes:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Array of addresses"
-        required: true
-        schema:
-          $ref: "#/definitions/BulkGetIds"
-      produces:
-      - "application/json"
+        - contract
+      summary: get ids stored in id contracts
+      description: ''
+      operationId: get_identifying_ids
       responses:
-        200:
+        '200':
           description: OK
-      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.id_contract_API_functions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkGetIds'
+        description: Array of addresses
+        required: true
   /contract/claim_ownership:
     post:
       tags:
-        - "contract"
-      summary: "transfer ownership to new address"
-      description: ""
-      operationId: "claim_ownership"
-      consumes:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Contract address and new owner's address"
-        required: true
-        schema:
-          $ref: "#/definitions/ClaimOwnership"
-      produces:
-      - "application/json"
+        - contract
+      summary: transfer ownership to new address
+      description: ''
+      operationId: claim_ownership
       responses:
-        200:
+        '200':
           description: OK
-      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+        '401':
+          description: Authentication error
+      x-swagger-router-controller: swagger_server.controllers.id_contract_API_functions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClaimOwnership'
+        description: Contract address and new owner's address
+        required: true
   /contract/register_third_party:
     post:
       tags:
-        - "contract"
-      summary: "registers a third party within a given smart contract"
-      description: ""
-      operationId: "register_allowed_user"
-      consumes:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Contract address and address of party to be registered"
-        required: true
-        schema:
-          $ref: "#/definitions/Register"
-      produces:
-      - "application/json"
+        - contract
+      summary: registers a third party within a given smart contract
+      description: ''
+      operationId: register_allowed_user
       responses:
-        200:
+        '200':
           description: OK
-        401: 
+        '401':
           description: Authorization error
-      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
+      x-swagger-router-controller: swagger_server.controllers.id_contract_API_functions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+        description: Contract address and address of party to be registered
+        required: true
   /contract/deregister_third_party:
     post:
       tags:
-        - "contract"
-      summary: "deregisters a third party within a given smart contract"
-      description: ""
-      operationId: "deregister_allowed_user"
-      consumes:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Contract address and address of party to be deregistered"
-        required: true
-        schema:
-          $ref: "#/definitions/Register"
-      produces:
-      - "application/json"
+        - contract
+      summary: deregisters a third party within a given smart contract
+      description: ''
+      operationId: deregister_allowed_user
       responses:
-        200:
+        '200':
           description: OK
-        401: 
+        '401':
           description: Authorization error
-      x-swagger-router-controller: "swagger_server.controllers.id_contract_API_functions"
-definitions:
-  Id:
-    type: "object"
-    properties:
-      id:
-        type: "string"
-      db_url:
-        type: "string"
-    xml:
-      name: "Id"
-  Set:
-    type: "object"
-    properties:
-      current_id:
-        type: "string"
-      new_id:
-        type: "string"
-    xml:
-      name: "Set"
-  Reset:
-    type: "object"
-    properties:
-      address:
-        type: "string"
-      id:
-        type: "string"
-    xml:
-      name: "Reset"
-  BulkGetIds:
-    type: "object"
-    properties:
-      addresses:
-        type: "array"
-        items: 
-          type: "string"
-    xml:
-      name: "BulkGetIds"
-  ClaimOwnership:
-    type: "object"
-    properties:
-      contract_address:
-        type: "string"
-      new_owner: 
-        type: "string"
-    xml:
-      name: "ClaimOwnership"
-  Register:
-    type: "object"
-    properties:
-      contract_address:
-        type: "string"
-      user_address: 
-        type: "string"
-    xml:
-      name: "Register"
+      x-swagger-router-controller: swagger_server.controllers.id_contract_API_functions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+        description: Contract address and address of party to be deregistered
+        required: true
+servers:
+  # - url: 'https://localhost:8080/v0.1'
+  - url: 'http://localhost:8080/v0.1'
+components:
+  schemas:
+    Id:
+      type: object
+      properties:
+        id:
+          type: string
+        db_url:
+          type: string
+      xml:
+        name: Id
+    Set:
+      type: object
+      properties:
+        current_id:
+          type: string
+        new_id:
+          type: string
+      xml:
+        name: Set
+    Reset:
+      type: object
+      properties:
+        address:
+          type: string
+        id:
+          type: string
+      xml:
+        name: Reset
+    BulkGetIds:
+      type: object
+      properties:
+        addresses:
+          type: array
+          items:
+            type: string
+      xml:
+        name: BulkGetIds
+    ClaimOwnership:
+      type: object
+      properties:
+        contract_address:
+          type: string
+        new_owner:
+          type: string
+      xml:
+        name: ClaimOwnership
+    Register:
+      type: object
+      properties:
+        contract_address:
+          type: string
+        user_address:
+          type: string
+      xml:
+        name: Register
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
