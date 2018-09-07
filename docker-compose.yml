@@ -10,7 +10,7 @@ services:
     environment:
       RPC_HOST: 159.65.197.244
       RPC_PORT: 8545
-      SEARCH_CONTRACT: "0x6daf923427ffa972c7da9cd74e7c1f7a81c346f4"
+      SEARCH_CONTRACT: "0x004786d4c19093eb47f6e4e4545a8ef3f722c8c0"
       AUTH0_DOMAIN: "registree.eu.auth0.com"
       API_IDENTIFIER: "https://registree.rocks/apis"
       ALGORITHMS: "['RS256']"
