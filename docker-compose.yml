@@ -9,8 +9,8 @@ services:
       - "8085:8080"
     environment:
       RPC_HOST: 159.65.197.244
-      RPC_PORT: 8545
-      SEARCH_CONTRACT: "0xe0f161f7fac1ec3673bad941b59e496a2d59f85d"
+      RPC_PORT: 7545
+      SEARCH_CONTRACT: "0x46ae27e520b7ee36a1143eccd9c6ba11b1adb8b2"
       AUTH0_DOMAIN: "registree.eu.auth0.com"
       API_IDENTIFIER: "https://registree.rocks/apis"
       ALGORITHMS: "['RS256']"
