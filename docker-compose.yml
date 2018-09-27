@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8085:8080"
+      - "8000:8000"
     environment:
       RPC_HOST: 159.65.197.244
       RPC_PORT: 7545
@@ -24,7 +24,7 @@ services:
     # expose:
     #   - 8080
     ports:
-      - "8443:8443"
+      - "2096:2096"
     volumes:
       - ~/cert:/etc/cert
     networks:
