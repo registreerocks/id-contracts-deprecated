@@ -214,8 +214,7 @@ paths:
         description: Contract address and address of party to be deregistered
         required: true
 servers:
-  # - url: 'https://localhost:8080/v0.1'
-  - url: 'http://localhost:8080/v0.1'
+  - url: 'http://localhost:8000/v0.1'
 components:
   schemas:
     Id:
