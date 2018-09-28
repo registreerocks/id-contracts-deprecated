@@ -1,15 +1,50 @@
+#  This is API docker file that is used to connect
+#  the Swagger/Flask API to Gunicorn, via Supervisord.
+#  Web3.py is then used to interact with the contracts
+#  (written and tested in truffle)
+
 FROM python:3.6
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# connexion
+RUN mkdir -p /usr/src
+COPY oas3.zip /usr/src
+WORKDIR /usr/src
 
-COPY ./package /usr/src/app
+RUN  apt-get update -y && \
+     apt-get upgrade -y && \
+     apt-get install unzip -y 
 
-RUN mkdir /usr/src/app/contracts
-COPY ./build/contracts /usr/src/app/contracts
+RUN unzip oas3.zip
+RUN mv connexion-oas3 connexion
+WORKDIR connexion
+RUN pip install -e .
 
-RUN pip3 install -e .
+# API
+RUN mkdir -p /usr/src/package
+COPY ./package /usr/src/package
+WORKDIR /usr/src/package
+RUN pip install -e .
 
-EXPOSE 8080
+#Smart Contracts
+RUN mkdir /usr/src/contracts
+COPY ./build/contracts /usr/src/contracts
 
-CMD ["python3", "-m", "swagger_server"]
+# EXPOSE 8080
+
+# CMD ["python3", "-m", "swagger_server"]
+
+# Deployment
+# RUN apt-get install nginx supervisor -y
+RUN apt-get install supervisor -y
+RUN pip install gunicorn
+
+
+# Supervisord
+RUN mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# COPY gunicorn.conf /etc/supervisor/conf.d/gunicorn.conf
+
+# EXPOSE 8080
+
+# Start processes
+CMD ["/usr/bin/supervisord"]
