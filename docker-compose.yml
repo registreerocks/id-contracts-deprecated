@@ -1,0 +1,35 @@
+version: '2.1'
+
+services:
+
+  id_contract_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      RPC_HOST: 111.11.111.111
+      RPC_PORT: 7545
+      SEARCH_CONTRACT: "0x7a4fcd9009303fe6d5d7a41563c4036de8fc6968"
+      AUTH0_DOMAIN: "your.domain.auth0.com"
+      API_IDENTIFIER: "https://your.domain/yourapi"
+      ALGORITHMS: "['RS256']"
+    networks:
+      - backbone
+
+  nginx:
+    restart: always
+    build: ./nginx
+    links:
+      - id_contract_api
+    ports:
+      - "2096:2096"
+    volumes:
+      - ~/cert:/etc/cert
+    networks:
+      - backbone
+      
+networks: 
+  backbone:
+    driver: bridge

@@ -29,23 +29,23 @@ To rebuild the image, call
 
 ## Deployment
 
-1. Deploy the search contract to a network of your choice. Adjust the `truffle.js` file accordingly.
+1. Deploy the search contract to a network of your choice. Adjust the `truffle.js` file by adding the correct host IP.
 
-2. Update the search contract address in the docker-compose file
+2. Update the RPC_HOST to the right host IP and set the search contract address in the docker-compose file.
 
 3. Close the direct access to the API by removing the lines 
     ```
     ports:
         - "8000:8000"
     ```
-    from the `docker-compose.yaml`
+    from the `docker-compose.yml`
 
 4. Change the environment variables 
     ```
     AUTH0_DOMAIN: "your.domain.auth0.com"
     API_IDENTIFIER: "https://your.domain/yourapi"
     ```
-    in the `docker-compose.yaml` to contain your Auth0 parameters.
+    in the `docker-compose.yml` to contain your Auth0 parameters.
 
 5. Place your certificates in the folder `$HOME/cert$`.
 
