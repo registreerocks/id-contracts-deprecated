@@ -12,8 +12,8 @@ services:
       RPC_HOST: 111.11.111.111
       RPC_PORT: 7545
       SEARCH_CONTRACT: "0x7eb78d193fa7b0495b8058a92c64a43b3767bbfe"
-      AUTH0_DOMAIN: "your.domain.auth0.com"
-      API_IDENTIFIER: "https://your.domain/yourapi"
+      AUTH0_DOMAIN: "registree.eu.auth0.com"
+      API_IDENTIFIER: "https://registree.rocks/apis"
       ALGORITHMS: "['RS256']"
     networks:
       - backbone
