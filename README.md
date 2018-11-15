@@ -6,17 +6,21 @@ This repository includes an API around Ethereum smart contracts to make them com
 
 1. Clone the repository and navigate inside it
 
-2. Compile the smart contracts
+2. Install dependencies
+
+        $ npm install
+
+3. Compile the smart contracts
 
         $ truffle compile
 
-3. Deploy the search contract
+4. Deploy the search contract
 
         $ truffle migrate --network development
 
-4. Update the search contract address in the docker-compose file
+5. Update the search contract address in the docker-compose file
 
-5. Start all docker containers
+6. Start all docker containers
 
         $ docker-compose up
     Wait for about a minute until all is configured correctly.
