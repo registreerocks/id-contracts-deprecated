@@ -10,7 +10,7 @@ var SearchContract = artifacts.require("./SearchContract.sol");
 //     }).then(function() {
 //         return SearchContract.deployed();
 //     }).then(function(instance) {
-//         return deployer.deploy(IdContract, "001", instance.address); // "001" for testing
+//         return deployer.deploy(IdContract, "001", "www.example.com", instance.address); // "001" for testing
 //     });
 // };
 
