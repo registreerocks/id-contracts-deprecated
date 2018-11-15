@@ -1,6 +1,6 @@
 pragma solidity ^0.4.20;
 
-import "./Ownable.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./SearchContract.sol";
 
 contract IdContract is Ownable {
@@ -8,16 +8,24 @@ contract IdContract is Ownable {
     string private id;
     string private dbUrl;
 
-    mapping (address => bool) allowedUsers;
+    mapping (address => bool) public allowedUsers;
+
+    bool public isQueriable;
 
     modifier onlyAllowedUser() {
         require(allowedUsers[msg.sender] || msg.sender == owner, "Sender unauthorized");
         _;
     }
 
+    modifier onlyQueriable() {
+        require(isQueriable == true, "Student data not queriable");
+        _;
+    }
+
     constructor(string _id, string _dbUrl, address _searchAddress) public {
         setId(_id, _searchAddress);
         dbUrl = _dbUrl;
+        isQueriable = false;
     }
 
     function setId(string _id, address _searchAddress) public onlyOwner {
@@ -30,11 +38,11 @@ contract IdContract is Ownable {
         id = "";
     }
 
-    function getId() external view onlyAllowedUser returns(string) {
+    function getId() external view onlyAllowedUser onlyQueriable returns(string) {
         return id;
     }
 
-    function getDbUrl() external view onlyAllowedUser returns(string) {
+    function getDbUrl() external view onlyAllowedUser onlyQueriable returns(string) {
         return dbUrl;
     }
 
@@ -44,5 +52,13 @@ contract IdContract is Ownable {
 
     function deregisterAllowedUser(address _user) external onlyOwner {
         allowedUsers[_user] = false;
+    }
+
+    function toggleQueriability() external onlyOwner {
+        if (isQueriable == false) {
+            isQueriable = true;
+        } else {
+            isQueriable = false;
+        }
     }
 } 
