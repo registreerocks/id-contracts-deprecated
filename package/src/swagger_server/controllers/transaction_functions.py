@@ -83,3 +83,18 @@ def _deregister_allowed_user(contract_address, user_address):
         return True
     except:
         return {'ERROR': 'Sender unauthorized'}, 401
+
+def _toggle_queriability(contract_address):
+    id_contract = W3.eth.contract(address=contract_address, abi=id_contract_interface['abi'])
+    try: 
+        id_contract.functions.toggleQueriability().transact({'from': W3.eth.accounts[0]})
+        return id_contract.functions.isQueriable().call({'from': W3.eth.accounts[0]})
+    except:
+        return {'ERROR': 'Sender unauthorized'}, 401
+
+def _check_queriability(contract_address):
+    id_contract = W3.eth.contract(address=contract_address, abi=id_contract_interface['abi'])
+    try: 
+        return id_contract.functions.isQueriable().call({'from': W3.eth.accounts[0]})
+    except:
+        return {'ERROR': 'Sender unauthorized'}, 401

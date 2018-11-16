@@ -1,11 +1,11 @@
 from .authentication import requires_auth, requires_scope
-from .transaction_functions import (_claim_ownership, _delete_id,
-                                    _deploy_id_contract,
+from .transaction_functions import (_check_queriability, _claim_ownership, 
+                                    _delete_id, _deploy_id_contract,
                                     _deregister_allowed_user,
                                     _get_id_contract_address,
                                     _get_identifying_id, _get_identifying_ids,
                                     _register_allowed_user, _set_id,
-                                    _set_id_after_deletion)
+                                    _set_id_after_deletion, _toggle_queriability)
 
 @requires_auth
 @requires_scope('admin', 'registree')
@@ -56,3 +56,13 @@ def register_allowed_user(body):
 @requires_scope('admin', 'student', 'registree')
 def deregister_allowed_user(body):
     return _deregister_allowed_user(body.get('contract_address'), body.get('user_address'))
+
+@requires_auth
+@requires_scope('student', 'registree')
+def toggle_queriability(body):
+    return _toggle_queriability(body.get('contract_address'))
+
+@requires_auth
+@requires_scope('student', 'recruiter', 'registree')
+def check_queriability(body):
+    return _check_queriability(body.get('contract_address'))
