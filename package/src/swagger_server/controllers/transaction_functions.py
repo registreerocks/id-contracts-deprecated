@@ -1,12 +1,18 @@
+from web3.middleware import geth_poa_middleware
 import os
 
 from Crypto.Hash import keccak
-from web3 import HTTPProvider
-from web3.auto.gethdev import Web3
+from web3 import HTTPProvider, Web3
 
 from .contracts import id_contract_interface, search_contract_interface
 
 W3 = Web3(HTTPProvider('http://' + os.getenv('RPC_HOST')+':'+os.getenv('RPC_PORT')))
+
+from web3.middleware import geth_poa_middleware
+
+# inject the poa compatibility middleware to the innermost layer
+W3.middleware_stack.inject(geth_poa_middleware, layer=0)
+
 SEARCH_CONTRACT_ADDRESS = Web3.toChecksumAddress(os.getenv('SEARCH_CONTRACT'))
 
 def _deploy_id_contract(_id, db_url):
