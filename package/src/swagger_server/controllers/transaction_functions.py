@@ -1,7 +1,8 @@
 import os
 
 from Crypto.Hash import keccak
-from web3 import HTTPProvider, Web3
+from web3 import HTTPProvider
+from web3.auto.gethdev import Web3
 
 from .contracts import id_contract_interface, search_contract_interface
 
