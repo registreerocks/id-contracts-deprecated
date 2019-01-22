@@ -57,12 +57,12 @@ def register_allowed_user(body):
 def deregister_allowed_user(body):
     return _deregister_allowed_user(body.get('contract_address'), body.get('user_address'))
 
-# @requires_auth
-# @requires_scope('student', 'registree')
+@requires_auth
+@requires_scope('student', 'registree')
 def toggle_queriability(body):
     return _toggle_queriability(body.get('contract_address'))
 
-# @requires_auth
-# @requires_scope('student', 'recruiter', 'registree')
+@requires_auth
+@requires_scope('student', 'recruiter', 'registree')
 def check_queriability(body):
     return _check_queriability(body.get('contract_address'))
