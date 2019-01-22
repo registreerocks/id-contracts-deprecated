@@ -38,7 +38,7 @@ contract IdContract is Ownable {
         id = "";
     }
 
-    function getId() external view onlyAllowedUser onlyQueriable returns(string) {
+    function getId() external view onlyAllowedUser onlyQueriable returns(string) {	
         return id;
     }
 
