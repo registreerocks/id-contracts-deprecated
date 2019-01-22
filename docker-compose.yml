@@ -9,14 +9,12 @@ services:
     ports:
       - "8000:8000"
     environment:
-      RPC_HOST: 111.11.111.111
+      RPC_HOST: 178.62.244.76
       RPC_PORT: 7545
-      SEARCH_CONTRACT: "0x7eb78d193fa7b0495b8058a92c64a43b3767bbfe"
+      SEARCH_CONTRACT: "0x78d3b8edc23d6a59a7aabfd78ee3fc88cf0f2448"
       AUTH0_DOMAIN: "registree.eu.auth0.com"
       API_IDENTIFIER: "https://registree.rocks/apis"
       ALGORITHMS: "['RS256']"
-      UPORT_ISSUER: "2ow5YgWEjhL1MGjk1Ze1z5znfrNnW3EjWtC"
-      UPORT_VALIDATION_URL: "http://178.62.244.76:8080/validateJWT"
     networks:
       - backbone
 
@@ -31,7 +29,7 @@ services:
       - ~/cert:/etc/cert
     networks:
       - backbone
-      
-networks: 
+
+networks:
   backbone:
     driver: bridge
