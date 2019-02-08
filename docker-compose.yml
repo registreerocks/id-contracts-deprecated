@@ -17,19 +17,10 @@ services:
       ALGORITHMS: "['RS256']"
     networks:
       - backbone
-
-  nginx:
-    restart: always
-    build: ./nginx
-    links:
-      - id_contract_api
-    ports:
-      - "2096:2096"
-    volumes:
-      - ~/cert:/etc/cert
-    networks:
-      - backbone
+      - apiaggregator_interconnector
 
 networks:
   backbone:
     driver: bridge
+  apiaggregator_interconnector:
+    external: true
